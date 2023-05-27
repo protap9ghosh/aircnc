@@ -9,13 +9,18 @@ const Login = () => {
    const { loading, setLoading, signIn, signInWithGoogle, resetPassword } = useContext(AuthContext);
    const navigate = useNavigate();
 
+   // handle submit
+   const handleSubmit = (event) => {
+      event.preventDefault();
+      const form = event.target;
+      const email = form.email.value;
+      const password = form.password.value;
+      // console.log(email, password);
 
-   // Handle google sign in
-   const handleGoogleSignIn = () => {
-      signInWithGoogle()
+      signIn(email, password)
          .then(result => {
             // console.log(result.user);
-            toast.success('Login successful');
+            toast.success('User Login successful');
             navigate("/")
          })
          .catch(error => {
@@ -24,6 +29,23 @@ const Login = () => {
             setLoading(false);
          })
    }
+
+   // Handle google sign in
+   const handleGoogleSignIn = () => {
+      signInWithGoogle()
+         .then(result => {
+            // console.log(result.user);
+            toast.success('User Login successful');
+            navigate("/")
+         })
+         .catch(error => {
+            console.log(error.message);
+            toast.error(error.message);
+            setLoading(false);
+         })
+   }
+
+   
 
    return (
       <div className='flex justify-center items-center min-h-screen'>
@@ -35,6 +57,7 @@ const Login = () => {
                </p>
             </div>
             <form
+               onSubmit={handleSubmit}
                noValidate=''
                action=''
                className='space-y-6 ng-untouched ng-pristine ng-valid'
