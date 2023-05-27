@@ -8,11 +8,9 @@ const Avatar = () => {
    return (
       <div>
          <img
-            className="rounded-full"
+            className="rounded-full w-8 h-8"
             src={user && user.photoURL ? user.photoURL : avatarImg}
             alt="Profile"
-            width="30"
-            height="30"
          />
       </div>
    );

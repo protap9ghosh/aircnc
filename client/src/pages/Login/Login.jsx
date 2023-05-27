@@ -73,6 +73,7 @@ const Login = () => {
                   Sign in to access your account
                </p>
             </div>
+            
             <form
                onSubmit={handleSubmit}
                noValidate=''
@@ -95,6 +96,7 @@ const Login = () => {
                         data-temp-mail-org='0'
                      />
                   </div>
+
                   <div>
                      <div className='flex justify-between'>
                         <label htmlFor='password' className='text-sm mb-2'>
@@ -117,15 +119,19 @@ const Login = () => {
                      type='submit'
                      className='bg-rose-500 w-full rounded-md py-3 text-white'
                   >
-                     {loading ? <TbFidgetSpinner size={24} className='mx-auto animate-spin' /> : 'Continue'}
+                     {
+                        loading ? <TbFidgetSpinner size={24} className='mx-auto animate-spin' /> : 'Continue'
+                     }
                   </button>
                </div>
             </form>
+
             <div className='space-y-1'>
                <button onClick={handleReset} className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
                   Forgot password?
                </button>
             </div>
+
             <div className='flex items-center pt-4 space-x-1'>
                <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
                <p className='px-3 text-sm dark:text-gray-400'>
@@ -133,11 +139,13 @@ const Login = () => {
                </p>
                <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
             </div>
+
             <div onClick={handleGoogleSignIn} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
                <FcGoogle size={32} />
 
                <p>Continue with Google</p>
             </div>
+
             <p className='px-6 text-sm text-center text-gray-400'>
                Don't have an account yet?{' '}
                <Link
