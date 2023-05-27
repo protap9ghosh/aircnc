@@ -5,13 +5,15 @@ import 'react-date-range/dist/theme/default.css'
 
 const Calender = () => {
    return (
-      <DateRange
-         rangeColors={['#262626']}
-         date={new Date()}
-         direction='vertical'
-         showDateDisplay={false}
-         minDate={new Date()}
-      />
+      <div className='mx-auto md:w-4/5'>
+         <DateRange
+            rangeColors={['#262626']}
+            date={new Date()}
+            direction='vertical'
+            showDateDisplay={false}
+            minDate={new Date()}
+         />
+      </div>
    )
 }
 
