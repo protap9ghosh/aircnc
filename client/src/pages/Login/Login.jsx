@@ -1,6 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
@@ -8,6 +8,9 @@ import { TbFidgetSpinner } from 'react-icons/tb'
 const Login = () => {
    const { loading, setLoading, signIn, signInWithGoogle, resetPassword } = useContext(AuthContext);
    const navigate = useNavigate();
+   const emailRef = useRef();
+   const location = useLocation();
+   const from = location.state?.from?.pathname || '/'
 
    // handle submit
    const handleSubmit = (event) => {
@@ -21,7 +24,7 @@ const Login = () => {
          .then(result => {
             // console.log(result.user);
             toast.success('User Login successful');
-            navigate("/")
+            navigate(from, {replace: true});
          })
          .catch(error => {
             console.log(error.message);
@@ -32,11 +35,12 @@ const Login = () => {
 
    // Handle google sign in
    const handleGoogleSignIn = () => {
+
       signInWithGoogle()
          .then(result => {
             // console.log(result.user);
             toast.success('User Login successful');
-            navigate("/")
+            navigate(from, { replace: true });
          })
          .catch(error => {
             console.log(error.message);
@@ -45,7 +49,20 @@ const Login = () => {
          })
    }
 
-   
+   // handle password reset
+   const handleReset = () => {
+      const email = emailRef.current.value;
+
+      resetPassword(email)
+         .then(() => {
+            toast.success('Please check your email for password reset link');
+            setLoading(false);
+         })
+         .catch(error => {
+            console.log(error.message);
+            toast.error(error.message);
+         })
+   }
 
    return (
       <div className='flex justify-center items-center min-h-screen'>
@@ -68,6 +85,7 @@ const Login = () => {
                         Email address
                      </label>
                      <input
+                        ref={emailRef}
                         type='email'
                         name='email'
                         id='email'
@@ -99,12 +117,12 @@ const Login = () => {
                      type='submit'
                      className='bg-rose-500 w-full rounded-md py-3 text-white'
                   >
-                     {loading ? <TbFidgetSpinner size={24} className='mx-auto animate-spin'/> : 'Continue'}
+                     {loading ? <TbFidgetSpinner size={24} className='mx-auto animate-spin' /> : 'Continue'}
                   </button>
                </div>
             </form>
             <div className='space-y-1'>
-               <button className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
+               <button onClick={handleReset} className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
                   Forgot password?
                </button>
             </div>
