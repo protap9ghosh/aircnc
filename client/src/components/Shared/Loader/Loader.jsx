@@ -4,7 +4,7 @@ const Loader = () => {
    return (
       <div
          className='h-[70vh] flex flex-col justify-center items-center'>
-         <FadeLoader size={100} color="#F43F5E" />
+         <FadeLoader size={100} color="#fb6f92" />
       </div>
 
    )
