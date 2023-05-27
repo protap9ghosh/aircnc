@@ -1,5 +1,6 @@
 import Container from "../Container/Container";
 import Logo from "./Logo";
+import MenuDropdown from "./MenuDropdown";
 import Search from "./Search";
 
 const NavBar = () => {
@@ -10,7 +11,7 @@ const NavBar = () => {
                <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
                   <Logo/>
                   <Search/>
-                  <div>Menu</div>
+                  <MenuDropdown/>
                </div>
             </Container>
          </div>
